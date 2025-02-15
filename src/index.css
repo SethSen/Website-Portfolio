@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors - Deep, rich backgrounds */
+  --primary-900: #0A090C;
+  --primary-800: #17161A;
+  --primary-700: #242329;
+  
+  /* Secondary Colors - Ethereal, tech-inspired whites */
+  --secondary-900: #F7F5FF;
+  --secondary-800: #F2F0FA;
+  --secondary-700: #E8E6F2;
+  --secondary-200: #D1CFE6;
+  --secondary-100: #C8C6DD;
+  --secondary-50: #BEBAD4;
+  
+  /* Accent Colors - Vibrant purples */
+  --accent-600: #7B07E4;
+  --accent-500: #8F1EF7;
+  --accent-400: #A346F9;
+
+  /* Neon Accents */
+  --neon-blue: #00F3FF;
+  --neon-purple: #BC13FE;
+}
+
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--primary-900);
+  color: var(--secondary-900);
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(123, 7, 228, 0.1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 0 20px rgba(123, 7, 228, 0.05);
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  background: var(--primary-800);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--accent-600),
+    var(--accent-400),
+    var(--accent-500)
+  );
+  animation: rotate-gradient 5s linear infinite;
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(123, 7, 228, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Smooth scroll behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-600) var(--primary-800);
+}
+
+.smooth-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.smooth-scroll::-webkit-scrollbar-track {
+  background: var(--primary-800);
+}
+
+.smooth-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent-600);
+  border-radius: 3px;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* Custom cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-600);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.1s ease;
+  transform: translate(-50%, -50%);
+}
+
+/* Animations */
+@keyframes rotate-gradient {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Parallax effect */
+.parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Loading animation */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-900), var(--primary-800));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: 9999;
+}
+
+/* Logo styles */
+.logo {
+  mix-blend-mode: difference;
+}
+
+.logo-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 2s ease-in-out forwards;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+  @apply bg-primary-800/95 backdrop-blur-sm border border-accent-600/20 rounded-lg shadow-lg;
+  transform-origin: top right;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-menu:focus-within {
+  @apply outline-none ring-2 ring-accent-600 ring-opacity-50;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .section {
+    scroll-snap-align: none;
+  }
+  
+  .custom-cursor {
+    display: none;
+  }
+}
