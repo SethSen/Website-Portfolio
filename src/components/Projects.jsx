@@ -87,7 +87,6 @@ const Projects = () => {
                 <h3 className="text-xl font-bold mb-4 text-white">{project.title}</h3>
                 <p className="text-white mb-4 text-sm leading-relaxed">{project.description}</p>
                 
-                {/* Skills and Tools Section - Smaller icons on mobile */}
                 <div className="mb-6 space-y-3">
                   <div>
                     <h4 className="text-sm font-semibold text-purple-300 mb-2">Skills</h4>
@@ -133,6 +132,6 @@ const Projects = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Projects;

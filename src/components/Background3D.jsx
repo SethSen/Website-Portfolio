@@ -4,7 +4,7 @@ import { Environment, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 
 const Particles = ({ count = 200 }) => {
-  const mesh = useRef<THREE.Points>(null);
+  const mesh = useRef();
   const { viewport } = useThree();
 
   const positions = new Float32Array(count * 3);

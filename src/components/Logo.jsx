@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
 
-interface LogoProps {
-  className?: string;
-  animated?: boolean;
-  size?: number;
-}
-
-const Logo: React.FC<LogoProps> = ({ className = '', animated = false }) => {
+const Logo = ({ className = '', animated = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
-  const logoRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef();
   
   const initialSize = 48;
   const scrolledSize = 36;
@@ -58,7 +51,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', animated = false }) => {
     { name: 'Contact', id: 5 }
   ];
 
-  const navigateToSection = (id: number) => {
+  const navigateToSection = (id) => {
     const sections = document.querySelectorAll('.section');
     sections[id].scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);

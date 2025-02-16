@@ -57,7 +57,7 @@ const Certifications = () => {
 
   const maxIndex = Math.max(0, certificates.length - itemsPerView);
 
-  const navigate = (direction: 'prev' | 'next') => {
+  const navigate = (direction) => {
     setCurrentIndex(prev => {
       if (direction === 'prev') {
         return Math.max(0, prev - 1);
@@ -67,11 +67,7 @@ const Certifications = () => {
     });
   };
 
-  const NavigationButton = ({ direction, onClick, disabled }: {
-    direction: 'prev' | 'next';
-    onClick: () => void;
-    disabled: boolean;
-  }) => (
+  const NavigationButton = ({ direction, onClick, disabled }) => (
     <button
       onClick={onClick}
       disabled={disabled}
@@ -163,7 +159,6 @@ const Certifications = () => {
         />
       </div>
 
-      {/* Navigation Dots */}
       <div className="flex justify-center gap-2 mt-6">
         {Array.from({ length: maxIndex + 1 }).map((_, index) => (
           <button

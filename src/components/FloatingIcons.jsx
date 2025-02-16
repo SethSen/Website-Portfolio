@@ -2,11 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Key, Binary, FileText, Code, Cpu } from 'lucide-react';
 
-interface FloatingIconsProps {
-  className?: string;
-}
-
-const FloatingIcons: React.FC<FloatingIconsProps> = ({ className = '' }) => {
+const FloatingIcons = ({ className = '' }) => {
   const icons = [Shield, Lock, Key, Binary, FileText, Code, Cpu];
   
   return (

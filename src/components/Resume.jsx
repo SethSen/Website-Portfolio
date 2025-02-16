@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, Briefcase, ChevronRight, Circle } from 'lucide-react';
 
 const Resume = () => {
-  const [activeTab, setActiveTab] = useState<'education' | 'experience'>('education');
+  const [activeTab, setActiveTab] = useState('education');
 
   const educationData = [
     {
@@ -78,7 +78,6 @@ const Resume = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 md:px-12 pt-20 mb-16">
-      {/* Tab Buttons - Stack on mobile */}
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 w-full sm:w-auto">
         {[
           { id: 'education', Icon: GraduationCap, label: 'EDUCATION' },
@@ -88,7 +87,7 @@ const Resume = () => {
             key={id}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveTab(id as 'education' | 'experience')}
+            onClick={() => setActiveTab(id)}
             className={`
               text-lg sm:text-xl font-bold flex items-center justify-center gap-2 
               p-3 rounded-lg transition-all duration-300
@@ -128,7 +127,6 @@ const Resume = () => {
                     <Circle className="w-6 h-6 text-accent-600 fill-primary-800" />
                   </div>
                   <div className="bg-primary-700/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-primary-700/20">
-                    {/* Header - Stack on mobile */}
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
                       <div>
                         <h3 className="text-accent-600 text-lg font-bold">{edu.institution}</h3>
@@ -138,7 +136,6 @@ const Resume = () => {
                         {edu.period}
                       </span>
                     </div>
-                    {/* Details Grid - Single column on mobile */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {Object.entries(edu.details).map(([category, items]) => (
                         <div key={category} className="space-y-2">
@@ -184,7 +181,6 @@ const Resume = () => {
                     <Circle className="w-6 h-6 text-accent-600 fill-primary-800" />
                   </div>
                   <div className="bg-primary-700/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-primary-700/20">
-                    {/* Header - Stack on mobile */}
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
                       <div>
                         <h3 className="text-accent-600 text-lg font-bold">{exp.company}</h3>
@@ -194,7 +190,6 @@ const Resume = () => {
                         {exp.period}
                       </span>
                     </div>
-                    {/* Details - Better spacing for mobile */}
                     <div className="space-y-4">
                       {Object.entries(exp.details).map(([category, items]) => (
                         <div key={category} className="space-y-2">

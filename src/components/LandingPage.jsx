@@ -75,7 +75,7 @@ const CyberAnimation = () => {
 };
 
 const LandingPage = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
