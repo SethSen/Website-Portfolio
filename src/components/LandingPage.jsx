@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Phone, Mail, Linkedin, FileText, Shield, Lock, Key, Binary } from 'lucide-react';
+import { Phone, Mail, Linkedin, FileText, Shield, Lock, Key, Binary, Github } from 'lucide-react';
 
 const CyberAnimation = () => {
   const gridSize = 12;
@@ -84,6 +84,13 @@ const LandingPage = () => {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const socialLinks = [
+    { icon: Phone, href: "tel:your-phone", label: "Call" },
+    { icon: Mail, href: "mailto:your-email", label: "Email" },
+    { icon: Linkedin, href: "https://linkedin.com/in/yourusername", label: "LinkedIn" },
+    { icon: Github, href: "https://github.com/yourusername", label: "GitHub" }
+  ];
+
   return (
     <div ref={containerRef} className="min-h-screen relative overflow-hidden">
       <motion.div
@@ -113,11 +120,7 @@ const LandingPage = () => {
           </p>
           
           <div className="flex gap-4 sm:gap-6 mb-6 sm:mb-8 justify-center lg:justify-start">
-            {[
-              { Icon: Phone, href: "tel:your-phone", label: "Call" },
-              { Icon: Mail, href: "mailto:your-email", label: "Email" },
-              { Icon: Linkedin, href: "https://linkedin.com/in/your-profile", label: "LinkedIn" }
-            ].map(({ Icon, href, label }, index) => (
+            {socialLinks.map(({ icon: Icon, href, label }, index) => (
               <motion.a
                 key={index}
                 whileHover={{ scale: 1.1 }}

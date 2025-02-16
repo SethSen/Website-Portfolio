@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Certifications = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(3);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const certificates = [
     {
@@ -40,138 +40,159 @@ const Certifications = () => {
   ];
 
   useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerView(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(2);
-      } else {
-        setItemsPerView(3);
-      }
-    };
+    if (!isAutoPlaying) return;
+    
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % certificates.length);
+    }, 3000);
 
-    updateItemsPerView();
-    window.addEventListener('resize', updateItemsPerView);
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-  const maxIndex = Math.max(0, certificates.length - itemsPerView);
+    return () => clearInterval(timer);
+  }, [isAutoPlaying, certificates.length]);
 
   const navigate = (direction) => {
-    setCurrentIndex(prev => {
-      if (direction === 'prev') {
-        return Math.max(0, prev - 1);
-      } else {
-        return Math.min(maxIndex, prev + 1);
-      }
+    setCurrentIndex((prev) => {
+      let newIndex = prev + direction;
+      if (newIndex < 0) newIndex = certificates.length - 1;
+      if (newIndex >= certificates.length) newIndex = 0;
+      return newIndex;
     });
   };
 
-  const NavigationButton = ({ direction, onClick, disabled }) => (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`absolute top-1/2 -translate-y-1/2 z-10 ${
-        direction === 'prev' ? 'left-4' : 'right-4'
-      } ${
-        disabled ? 'opacity-50 cursor-not-allowed' : ''
-      } bg-[#36343E] p-3 rounded-full shadow-lg group transition-colors`}
-      aria-label={`${direction === 'prev' ? 'Previous' : 'Next'} certificate`}
-    >
-      {direction === 'prev' ? (
-        <ChevronLeft className="w-6 h-6 transition-colors group-hover:text-[#7B07E4]" />
-      ) : (
-        <ChevronRight className="w-6 h-6 transition-colors group-hover:text-[#7B07E4]" />
-      )}
-    </button>
-  );
+  const getVisibleCertificates = () => {
+    const visibleIndexes = [-1, 0, 1].map(offset => {
+      let index = currentIndex + offset;
+      if (index < 0) index = certificates.length - 1;
+      if (index >= certificates.length) index = 0;
+      return index;
+    });
+    return visibleIndexes.map(index => certificates[index]);
+  };
+
+  const getCardStyle = (position) => {
+    const baseScale = 0.7;
+    switch (position) {
+      case 'left':
+        return {
+          transform: `perspective(1000px) rotateY(15deg) scale(${baseScale}) translateX(-50%)`,
+          zIndex: 1,
+          filter: 'brightness(0.7) blur(1px)'
+        };
+      case 'center':
+        return {
+          transform: 'perspective(1000px) rotateY(0deg) scale(1) translateX(0)',
+          zIndex: 2,
+          filter: 'brightness(1) blur(0px)'
+        };
+      case 'right':
+        return {
+          transform: `perspective(1000px) rotateY(-15deg) scale(${baseScale}) translateX(50%)`,
+          zIndex: 1,
+          filter: 'brightness(0.7) blur(1px)'
+        };
+      default:
+        return {};
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-4xl font-bold mb-16 text-center"
       >
         Certifications
       </motion.h2>
 
-      <div className="w-full max-w-7xl relative">
-        <div className="overflow-hidden px-4">
-          <motion.div
-            className="flex gap-6"
-            animate={{
-              x: `${-100 * currentIndex}%`
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 150,
-              damping: 20
-            }}
-          >
-            <AnimatePresence mode="wait">
-              {certificates.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                  className={`flex-shrink-0 ${
-                    itemsPerView === 1 
-                      ? 'w-full' 
-                      : itemsPerView === 2 
-                        ? 'w-1/2' 
-                        : 'w-1/3'
-                  } px-3`}
-                >
-                  <div className="bg-[#36343E] rounded-lg overflow-hidden shadow-lg h-full">
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#36343E] to-transparent opacity-50" />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold mb-2">{cert.title}</h3>
-                      <p className="text-[#C3C1D0] mb-1">{cert.issuer}</p>
-                      <p className="text-[#C3C1D0] opacity-75 text-sm">{cert.date}</p>
-                    </div>
+      <div 
+        className="relative w-full max-w-7xl h-[500px] perspective-1000"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        <div className="w-full h-full flex items-center justify-center relative">
+          {getVisibleCertificates().map((cert, index) => {
+            const position = index === 0 ? 'left' : index === 1 ? 'center' : 'right';
+            const style = getCardStyle(position);
+            
+            return (
+              <motion.div
+                key={`${position}-${cert.title}`}
+                initial={false}
+                animate={style}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeInOut"
+                }}
+                className="absolute w-full max-w-xl"
+              >
+                <div className={`
+                  relative bg-[#36343E]/90 backdrop-blur-lg rounded-2xl overflow-hidden
+                  border border-purple-500/20 transition-all duration-300
+                  ${position === 'center' ? 'shadow-lg ring-1 ring-purple-500/30' : 'shadow-md'}
+                  hover:ring-2 hover:ring-purple-500/40
+                `}>
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={cert.image}
+                      alt={cert.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#36343E] to-transparent opacity-50" />
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                  <div className="p-8">
+                    <h3 className="text-2xl font-bold mb-3 text-white">
+                      {cert.title}
+                    </h3>
+                    <p className="text-purple-300 mb-2 text-lg">
+                      {cert.issuer}
+                    </p>
+                    <p className="text-purple-200/80 text-sm">
+                      {cert.date}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <NavigationButton
-          direction="prev"
-          onClick={() => navigate('prev')}
-          disabled={currentIndex === 0}
-        />
-        <NavigationButton
-          direction="next"
-          onClick={() => navigate('next')}
-          disabled={currentIndex === maxIndex}
-        />
-      </div>
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-purple-900/80 p-3 rounded-full 
+            shadow-md hover:shadow-lg ring-1 ring-purple-500/20 hover:ring-purple-500/40
+            transition-all duration-300 hover:bg-purple-800 group"
+          aria-label="Previous certificate"
+        >
+          <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        </button>
 
-      <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              currentIndex === index 
-                ? 'bg-[#7B07E4] w-4' 
-                : 'bg-[#C3C1D0]'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+        <button
+          onClick={() => navigate(1)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-purple-900/80 p-3 rounded-full 
+            shadow-md hover:shadow-lg ring-1 ring-purple-500/20 hover:ring-purple-500/40
+            transition-all duration-300 hover:bg-purple-800 group"
+          aria-label="Next certificate"
+        >
+          <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        </button>
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {certificates.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`
+                transition-all duration-300 rounded-full
+                ${currentIndex === index 
+                  ? 'w-6 h-2 bg-purple-500 ring-1 ring-purple-400/50' 
+                  : 'w-2 h-2 bg-purple-500/40 hover:bg-purple-500/60'
+                }
+              `}
+              aria-label={`Go to certificate ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

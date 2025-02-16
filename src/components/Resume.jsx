@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, Briefcase, ChevronRight, Circle } from 'lucide-react';
 
 const Resume = () => {
   const [activeTab, setActiveTab] = useState('education');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const educationData = [
     {
@@ -104,9 +109,9 @@ const Resume = () => {
       </div>
 
       <AnimatePresence mode="wait">
-        {activeTab === 'education' ? (
+        {mounted && (
           <motion.div
-            key="education"
+            key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -114,84 +119,35 @@ const Resume = () => {
             className="w-full max-w-3xl"
           >
             <div className="relative space-y-6">
-              {educationData.map((edu, index) => (
+              {(activeTab === 'education' ? educationData : experienceData).map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative pl-4 md:pl-8"
                 >
-                  {index < educationData.length - 1 && <TimelineConnector />}
+                  {index < (activeTab === 'education' ? educationData : experienceData).length - 1 && <TimelineConnector />}
                   <div className="absolute left-0 top-3 w-6 h-6 hidden md:block">
                     <Circle className="w-6 h-6 text-accent-600 fill-primary-800" />
                   </div>
-                  <div className="bg-primary-700/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-primary-700/20">
+                  <div className="bg-primary-700/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-primary-700/20 card-glow">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
                       <div>
-                        <h3 className="text-accent-600 text-lg font-bold">{edu.institution}</h3>
-                        <h4 className="text-base font-semibold text-secondary-900">{edu.degree}</h4>
+                        <h3 className="text-accent-600 text-lg font-bold">
+                          {activeTab === 'education' ? item.institution : item.company}
+                        </h3>
+                        <h4 className="text-base font-semibold text-secondary-900">
+                          {activeTab === 'education' ? item.degree : item.position}
+                        </h4>
                       </div>
                       <span className="text-sm text-secondary-200 bg-primary-700/20 px-2 py-1 rounded-full self-start">
-                        {edu.period}
+                        {item.period}
                       </span>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {Object.entries(edu.details).map(([category, items]) => (
-                        <div key={category} className="space-y-2">
-                          <h5 className="text-accent-400 text-sm font-semibold border-b border-accent-600/20 pb-1">
-                            {category}
-                          </h5>
-                          <ul className="space-y-2">
-                            {items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-2 text-sm text-secondary-200">
-                                <ChevronRight className="w-4 h-4 text-accent-600 flex-shrink-0 mt-0.5" />
-                                <span className="leading-relaxed">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="experience"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-3xl"
-          >
-            <div className="relative space-y-6">
-              {experienceData.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative pl-4 md:pl-8"
-                >
-                  {index < experienceData.length - 1 && <TimelineConnector />}
-                  <div className="absolute left-0 top-3 w-6 h-6 hidden md:block">
-                    <Circle className="w-6 h-6 text-accent-600 fill-primary-800" />
-                  </div>
-                  <div className="bg-primary-700/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-primary-700/20">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-4">
-                      <div>
-                        <h3 className="text-accent-600 text-lg font-bold">{exp.company}</h3>
-                        <h4 className="text-base font-semibold text-secondary-900">{exp.position}</h4>
-                      </div>
-                      <span className="text-sm text-secondary-200 bg-primary-700/20 px-2 py-1 rounded-full self-start">
-                        {exp.period}
-                      </span>
-                    </div>
-                    <div className="space-y-4">
-                      {Object.entries(exp.details).map(([category, items]) => (
+                      {Object.entries(item.details).map(([category, items]) => (
                         <div key={category} className="space-y-2">
                           <h5 className="text-accent-400 text-sm font-semibold border-b border-accent-600/20 pb-1">
                             {category}
