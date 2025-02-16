@@ -7,5 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  base: './', // Changed to relative path for GitHub Pages
+  base: '/SethSen/', // Set to your GitHub repository name
 });
