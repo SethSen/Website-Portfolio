@@ -65,7 +65,7 @@ const AboutMe = () => {
             <div className="relative">
               <div className="relative aspect-square max-w-sm mx-auto overflow-hidden rounded-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80"
+                  src="/images/profile.jpeg"
                   alt="Profile"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
