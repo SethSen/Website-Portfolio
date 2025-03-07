@@ -138,51 +138,51 @@ const ProjectCard = ({ project, index }) => {
 
 const Projects = () => {
   const projects = [
+    // {
+    //   title: "Network Intrusion Detection System",
+    //   description: "Developed an AI-powered network intrusion detection system using machine learning algorithms to identify and prevent potential security threats in real-time.",
+    //   skills: ["Wireshark", "Python", "Machine Learning", "Network Security"],
+    //   tools: ["Snort", "Tensorflow", "Packet Analysis", "Linux"],
+    //   image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80",
+    //   link: "#"
+    // },
+    // {
+    //   title: "Blockchain Security Audit Tool",
+    //   description: "Created a comprehensive security audit tool for smart contracts and blockchain applications, identifying vulnerabilities and suggesting improvements.",
+    //   skills: ["Solidity", "Smart Contracts", "Blockchain", "Security Testing"],
+    //   tools: ["Truffle", "Ganache", "Web3.js", "MetaMask"],
+    //   image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
+    //   link: "#"
+    // },
+    // {
+    //   title: "Digital Forensics Framework",
+    //   description: "Built a digital forensics framework for investigating cybercrime, featuring automated evidence collection and analysis capabilities.",
+    //   skills: ["Digital Forensics", "Evidence Collection", "Data Analysis", "Chain of Custody"],
+    //   tools: ["Autopsy", "EnCase", "FTK", "Volatility"],
+    //   image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80",
+    //   link: "#"
+    // },
+    // {
+    //   title: "Zero Trust Architecture Implementation",
+    //   description: "Designed and implemented a zero trust security architecture for enterprise systems, enhancing security through strict access controls.",
+    //   skills: ["Network Architecture", "Identity Management", "Access Control", "Security Policies"],
+    //   tools: ["Cisco ISE", "Okta", "Palo Alto Networks", "Azure AD"],
+    //   image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80",
+    //   link: "#"
+    // },
+    // {
+    //   title: "Threat Intelligence Platform",
+    //   description: "Developed a threat intelligence platform that aggregates and analyzes security data from multiple sources to provide actionable insights.",
+    //   skills: ["Threat Analysis", "Data Integration", "API Development", "Risk Assessment"],
+    //   tools: ["Node.js", "ElasticSearch", "MISP", "OpenCTI"],
+    //   image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&q=80",
+    //   link: "#"
+    // },
     {
-      title: "Network Intrusion Detection System",
-      description: "Developed an AI-powered network intrusion detection system using machine learning algorithms to identify and prevent potential security threats in real-time.",
-      skills: ["Wireshark", "Python", "Machine Learning", "Network Security"],
-      tools: ["Snort", "Tensorflow", "Packet Analysis", "Linux"],
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80",
-      link: "#"
-    },
-    {
-      title: "Blockchain Security Audit Tool",
-      description: "Created a comprehensive security audit tool for smart contracts and blockchain applications, identifying vulnerabilities and suggesting improvements.",
-      skills: ["Solidity", "Smart Contracts", "Blockchain", "Security Testing"],
-      tools: ["Truffle", "Ganache", "Web3.js", "MetaMask"],
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80",
-      link: "#"
-    },
-    {
-      title: "Digital Forensics Framework",
-      description: "Built a digital forensics framework for investigating cybercrime, featuring automated evidence collection and analysis capabilities.",
-      skills: ["Digital Forensics", "Evidence Collection", "Data Analysis", "Chain of Custody"],
-      tools: ["Autopsy", "EnCase", "FTK", "Volatility"],
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80",
-      link: "#"
-    },
-    {
-      title: "Zero Trust Architecture Implementation",
-      description: "Designed and implemented a zero trust security architecture for enterprise systems, enhancing security through strict access controls.",
-      skills: ["Network Architecture", "Identity Management", "Access Control", "Security Policies"],
-      tools: ["Cisco ISE", "Okta", "Palo Alto Networks", "Azure AD"],
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80",
-      link: "#"
-    },
-    {
-      title: "Threat Intelligence Platform",
-      description: "Developed a threat intelligence platform that aggregates and analyzes security data from multiple sources to provide actionable insights.",
-      skills: ["Threat Analysis", "Data Integration", "API Development", "Risk Assessment"],
-      tools: ["Node.js", "ElasticSearch", "MISP", "OpenCTI"],
-      image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&q=80",
-      link: "#"
-    },
-    {
-      title: "Security Awareness Training Platform",
-      description: "Created an interactive training platform for employees to learn about cybersecurity best practices through simulated scenarios and assessments.",
-      skills: ["E-Learning", "Gamification", "Content Development", "User Experience"],
-      tools: ["React", "Node.js", "MongoDB", "AWS"],
+      title: "Project #1 Coming Soon...",
+      description: "Project 1 will be coming soon",
+      skills: ["Skills 1"],
+      tools: ["Tools 1"],
       image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80",
       link: "#"
     }

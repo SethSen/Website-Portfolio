@@ -71,22 +71,15 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "your.email@example.com",
-      href: "mailto:your.email@example.com",
+      value: "seth.sen@hotmail.com",
+      href: "mailto:seth.sen@hotmail.com",
       color: "from-purple-600/20 to-purple-500/10"
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+1 (234) 567-8900",
-      href: "tel:+12345678900",
-      color: "from-purple-500/20 to-purple-400/10"
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
-      value: "LinkedIn Profile",
-      href: "https://linkedin.com/in/your-profile",
+      value: "linkedin.com/in/seth-sen",
+      href: "https://www.linkedin.com/in/seth-sen/",
       color: "from-purple-400/20 to-purple-300/10"
     }
   ];
@@ -94,7 +87,7 @@ const Contact = () => {
   return (
     <motion.div
       style={{ y: containerY, opacity: containerOpacity }}
-      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative"
+      className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative mb-32"
     >
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}

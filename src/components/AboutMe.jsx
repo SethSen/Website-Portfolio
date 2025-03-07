@@ -7,52 +7,41 @@ const AboutMe = () => {
     "Security Tools": [
       "Wireshark",
       "Nmap",
-      "Metasploit",
-      "Burp Suite",
-      "IDA Pro"
+      "Kali Linux"
     ],
     "Development": [
-      "Visual Studio Code",
-      "Git",
-      "Docker",
-      "Jenkins",
-      "Kubernetes"
+      "Python",
+      "JavaScript",
+      "Bash",
+      "SQL"
     ],
     "Forensics": [
-      "Autopsy",
-      "EnCase",
-      "FTK Imager",
-      "Volatility",
-      "Cellebrite"
+      "Forensic Tool Kit (FTK)",
+      "Cellebrite",
+      "Magnet Axiom",
+      "Xways",
+      "MobilEdit",
+      "WinHex"
     ]
   };
 
   const skills = {
     "Cybersecurity": [
       "Network Security",
-      "Penetration Testing",
-      "Incident Response",
       "Threat Analysis",
       "Security Architecture"
     ],
-    "Development": [
-      "Full Stack Development",
-      "API Security",
-      "Cloud Security",
-      "CI/CD Implementation",
-      "Secure Coding Practices"
-    ],
     "Digital Forensics": [
-      "Memory Analysis",
-      "Disk Forensics",
-      "Network Forensics",
-      "Mobile Device Analysis",
-      "Malware Analysis"
+      "Evidence Collection and Preservation",
+      "Technical Report Writing",
+      "Mobile/Hard Disk Extraction",
+      "Mobile and Cloud Analysis",
+      "Data Recovery"
     ]
   };
 
   return (
-    <div className="min-h-screen flex items-center px-4 sm:px-8 lg:px-12">
+    <div className="min-h-screen flex items-center px-4 sm:px-8 lg:px-12 mb-16">
       <div className="max-w-7xl mx-auto w-full py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Photo and Tools */}
@@ -106,10 +95,10 @@ const AboutMe = () => {
               <h2 className="text-4xl font-bold text-purple-300">About Me</h2>
               <div className="space-y-4 text-lg text-purple-100/90">
                 <p>
-                  <strong className="text-purple-300">Hello! I'm Seth Sen</strong>, a cybersecurity expert and digital forensics specialist based in Vancouver, BC. With over 5 years of experience in the field, I specialize in protecting digital assets and investigating cyber incidents.
+                  <strong className="text-purple-300">Hello! I'm Seth Sen</strong>, a cybersecurity & digital forensics student in Vancouver, BC. I am currently in my 3rd year of my Bachelors. I specialize in protecting digital assets and investigating digital evidence. 
                 </p>
                 <p>
-                  My journey in cybersecurity began with a fascination for understanding how systems work and how to protect them. Today, I combine my technical expertise with a proactive approach to security, helping organizations stay ahead of emerging threats.
+                  My journey into cybersecurity and digital forensics began with a strong desire to help others, combined with my passion for technology. I believe this field is the perfect fit for me, as I am a dedicated and hardworking individual who is committed to using technology to make a positive impact. 
                 </p>
               </div>
             </div>
@@ -122,10 +111,8 @@ const AboutMe = () => {
               <h3 className="text-xl font-semibold text-purple-300">Key Achievements</h3>
               <ul className="space-y-3">
                 {[
-                  "Led cybersecurity initiatives reducing security incidents by 40%",
-                  "Developed and implemented enterprise-wide security protocols",
-                  "Published research on advanced persistent threats",
-                  "Speaker at major security conferences"
+                  "Placed 3rd place in CyberSci Cyber Security Competition by completing multiple cybersecurity/hacking oriented challenges",
+                  "Set Rep for BCIT CIT Class of 2023, advocated for students concerns and informed them of events and information"
                 ].map((achievement, index) => (
                   <motion.li
                     key={index}

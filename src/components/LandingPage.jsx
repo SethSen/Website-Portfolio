@@ -85,10 +85,9 @@ const LandingPage = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const socialLinks = [
-    { icon: Phone, href: "tel:your-phone", label: "Call" },
-    { icon: Mail, href: "mailto:your-email", label: "Email" },
-    { icon: Linkedin, href: "https://linkedin.com/in/yourusername", label: "LinkedIn" },
-    { icon: Github, href: "https://github.com/yourusername", label: "GitHub" }
+    { icon: Mail, href: "mailto:seth.sen@hotmail.com", label: "Email" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/seth-sen/", label: "LinkedIn", target: "_blank", rel: "noopener noreferrer" },
+    { icon: Github, href: "https://github.com/SethSen", label: "GitHub", target: "_blank", rel: "noopener noreferrer" }
   ];
 
   return (
@@ -112,11 +111,8 @@ const LandingPage = () => {
           <h1 className="font-serif text-4xl sm:text-6xl font-bold text-accent-400 mb-4 tracking-wider">
             SETH SEN
           </h1>
-          <p className="font-sans text-base sm:text-lg text-secondary-200 mb-6 leading-relaxed max-w-lg mx-auto lg:mx-0">
-            Cybersecurity expert specializing in digital forensics and network security.
-          </p>
           <p className="font-sans text-base sm:text-lg text-secondary-200 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
-            Protecting digital assets through innovative solutions and proactive defense strategies.
+            Explore my world on this page! Learn about my hobbies, skills, and everything in between. Get to know me better in just a few clicks!
           </p>
           
           <div className="flex gap-4 sm:gap-6 mb-6 sm:mb-8 justify-center lg:justify-start">
@@ -126,6 +122,8 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 href={href}
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="flex flex-col items-center gap-1"
               >
                 <div className="p-3 sm:p-4 glass-card rounded-full hover:bg-accent-400/20 transition-all duration-300 group">
@@ -136,14 +134,19 @@ const LandingPage = () => {
             ))}
           </div>
 
-          <motion.button
+          <motion.a
+            href="/links/SethsResume.pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-accent-gradient rounded-lg text-secondary-900 font-semibold hover:opacity-90 transition-all duration-300 shadow-lg mx-auto lg:mx-0 mb-4 sm:mb-8"
+            className="w-auto max-w-xs flex items-center justify-center gap-2 px-3 py-3 bg-accent-gradient rounded-lg text-secondary-900 font-semibold hover:opacity-90 transition-all duration-300 shadow-lg mx-auto lg:mx-0 mb-4 sm:mb-8"
           >
             <FileText className="w-5 h-5" />
-            Download Resume
-          </motion.button>
+            <span className="text-sm sm:text-base">Download Resume</span>
+          </motion.a>
+
+
 
           <motion.div
             animate={{ y: [0, 10, 0] }}
